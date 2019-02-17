@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+<link rel="stylesheet" href="../static/blog/style1.css">
+{% block title %}Wine{% endblock %}
+{% block body %}
+
+
+    <div class="blog-wrapper section-padding-100 clearfix">
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-9">
+
+                            {% if all_wines %}
+                                {% for wine in all_wines %}
+
+                                    <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1000ms">
+                                        <div class="row align-items-center">
+
+
+
+                                            <div class="col-12 col-md-6">
+                                                <!-- Blog Content -->
+                                                <div class="single-blog-content">
+                                                 <div class="line"></div>
+                                                        <h4><a href="#" class="post-headline">
+                                                            Winery: {{ wine.winery }}
+                                                            </a></h4>
+
+                                                         <p>{{ wine.description}}</p><br>
+
+                                                    Designation: <p> {{wine.designation}}</p>
+                                                  Province:  <p> {{ wine.province}}</p>
+                                                   Country:  <p>{{ wine.country}}</p>
+                                                   Points:  <p>{{ wine.points}}</p>
+                                                   Price:  <p>{{ wine.price}}</p>
+                                                    <p>{{ wine.region1}}, {{ wine.region2}}</p>
+
+                                                    <p>{{ wine.variety}}</p>
+
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                {% endfor %}
+
+                                <!--pagination-->
+                                <div class="row align-items-center">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="pagination">
+                                        <span class="step-links">
+                                            {% if all_wines.has_previous %}
+                                                <a href="?page=1">&laquo; first</a>
+                                                <a href="?page={{ all_wines.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                                            {% endif %}
+
+                                            <span class="current">
+                                                Page {{ all_wines.number }} of {{ all_wines.paginator.num_pages }}.
+                                            </span>
+
+                                            {% if all_wines.has_next %}
+                                                <a href="?page={{ all_wines.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                                                <a href="?page={{ all_wines.paginator.num_pages }}">last &raquo;</a>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+</div></div></div></div>
+            </div>
+
+    </div>
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="../static/blog/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../static/blog/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../static/blog/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="../static/blog/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../static/blog/js/active.js"></script>
+{% endblock %}
